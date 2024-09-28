@@ -1,0 +1,84 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.3
+2 info using node@v20.17.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/home/container/.npmrc
+5 silly config load:file:/usr/local/etc/npmrc
+6 verbose title npm install discord.js @discordjs/builders @discordjs/rest discord-api-types axios
+7 verbose argv "install" "discord.js" "@discordjs/builders" "@discordjs/rest" "discord-api-types" "axios"
+8 verbose logfile logs-max:10 dir:/home/container/.npm/_logs/2024-09-14T07_40_11_277Z-
+9 verbose logfile /home/container/.npm/_logs/2024-09-14T07_40_11_277Z-debug-0.log
+10 silly packumentCache heap:1818755072 maxSize:454688768 maxEntrySize:227344384
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 silly idealTree buildDeps
+14 silly fetch manifest @discordjs/builders@^1.9.0
+15 silly packumentCache full:https://registry.npmjs.org/@discordjs%2fbuilders cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/@discordjs%2fbuilders 193ms (cache revalidated)
+17 silly packumentCache full:https://registry.npmjs.org/@discordjs%2fbuilders set size:4582423 disposed:false
+18 silly fetch manifest @discordjs/rest@^2.4.0
+19 silly packumentCache full:https://registry.npmjs.org/@discordjs%2frest cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/@discordjs%2frest 114ms (cache revalidated)
+21 silly packumentCache full:https://registry.npmjs.org/@discordjs%2frest set size:4583161 disposed:false
+22 silly fetch manifest axios@^1.7.7
+23 silly packumentCache full:https://registry.npmjs.org/axios cache-miss
+24 http fetch GET 200 https://registry.npmjs.org/axios 81ms (cache revalidated)
+25 silly packumentCache full:https://registry.npmjs.org/axios set size:585045 disposed:false
+26 silly fetch manifest discord-api-types@^0.37.100
+27 silly packumentCache full:https://registry.npmjs.org/discord-api-types cache-miss
+28 http fetch GET 200 https://registry.npmjs.org/discord-api-types 194ms (cache revalidated)
+29 silly packumentCache full:https://registry.npmjs.org/discord-api-types set size:6169909 disposed:false
+30 silly fetch manifest discord.js@^14.16.2
+31 silly packumentCache full:https://registry.npmjs.org/discord.js cache-miss
+32 http fetch GET 200 https://registry.npmjs.org/discord.js 91ms (cache revalidated)
+33 silly packumentCache full:https://registry.npmjs.org/discord.js set size:6985410 disposed:false
+34 silly placeDep ROOT @discordjs/builders@1.9.0 REPLACE for:  want: ^1.9.0
+35 silly placeDep ROOT @discordjs/rest@2.4.0 REPLACE for:  want: ^2.4.0
+36 silly placeDep ROOT axios@1.7.7 REPLACE for:  want: ^1.7.7
+37 silly placeDep ROOT discord-api-types@0.37.100 REPLACE for:  want: ^0.37.100
+38 silly placeDep ROOT discord.js@14.16.2 REPLACE for:  want: ^14.16.2
+39 silly reify moves {}
+40 silly audit bulk request {
+40 silly audit   'discord-api-types': [ '0.37.97', '0.37.83', '0.37.100' ],
+40 silly audit   '@discordjs/collection': [ '2.1.1', '1.5.3' ],
+40 silly audit   '@discordjs/formatters': [ '0.5.0' ],
+40 silly audit   '@discordjs/util': [ '1.1.1' ],
+40 silly audit   '@discordjs/voice': [ '0.17.0' ],
+40 silly audit   '@discordjs/ws': [ '1.1.1' ],
+40 silly audit   '@sapphire/async-queue': [ '1.5.3' ],
+40 silly audit   '@sapphire/shapeshift': [ '4.0.0' ],
+40 silly audit   '@sapphire/snowflake': [ '3.5.3' ],
+40 silly audit   '@types/node': [ '22.1.0' ],
+40 silly audit   '@types/ws': [ '8.5.12' ],
+40 silly audit   '@vladfrangu/async_event_emitter': [ '2.4.6' ],
+40 silly audit   asynckit: [ '0.4.0' ],
+40 silly audit   'combined-stream': [ '1.0.8' ],
+40 silly audit   'delayed-stream': [ '1.0.0' ],
+40 silly audit   'fast-deep-equal': [ '3.1.3' ],
+40 silly audit   'follow-redirects': [ '1.15.6' ],
+40 silly audit   'form-data': [ '4.0.0' ],
+40 silly audit   lodash: [ '4.17.21' ],
+40 silly audit   'lodash.snakecase': [ '4.1.1' ],
+40 silly audit   'magic-bytes.js': [ '1.10.0' ],
+40 silly audit   'mime-db': [ '1.52.0' ],
+40 silly audit   'mime-types': [ '2.1.35' ],
+40 silly audit   'prism-media': [ '1.3.5' ],
+40 silly audit   'proxy-from-env': [ '1.1.0' ],
+40 silly audit   'ts-mixer': [ '6.0.4' ],
+40 silly audit   tslib: [ '2.6.3' ],
+40 silly audit   undici: [ '6.19.8' ],
+40 silly audit   'undici-types': [ '6.13.0' ],
+40 silly audit   ws: [ '8.18.0' ],
+40 silly audit   '@discordjs/builders': [ '1.9.0' ],
+40 silly audit   '@discordjs/rest': [ '2.4.0' ],
+40 silly audit   axios: [ '1.7.7' ],
+40 silly audit   'discord.js': [ '14.16.2' ]
+40 silly audit }
+41 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 257ms
+42 silly audit report {}
+43 verbose cwd /home/container
+44 verbose os Linux 5.15.0-119-generic
+45 verbose node v20.17.0
+46 verbose npm  v10.8.3
+47 verbose exit 0
+48 info ok
