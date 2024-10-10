@@ -1,1 +1,1 @@
-42 path=commands/about_sever.js
+42 path=commands/about_server.js

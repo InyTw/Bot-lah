@@ -3,7 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('about_sever')
+        .setName('about_server')
         .setDescription('關於伺服器'),
     async execute(interaction) {
         const ipEmbed = new EmbedBuilder()
