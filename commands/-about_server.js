@@ -12,6 +12,6 @@ module.exports = {
             .setThumbnail()
             .setColor('00ff00');
 
-        await interaction.reply({ embeds: [aboutEmbed] });
+        await interaction.reply({ embeds: [about_serverEmbed] });
     },
 };
