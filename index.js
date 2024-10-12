@@ -226,5 +226,10 @@ client.on('guildMemberRemove', member => {
   }
 });
 
-
+client.on(Events.MessageCreate, (message) => {
+    if (message.contest === 'w')
+        message.channel.send('ww')
+}
+});
+          
 client.login(token);
