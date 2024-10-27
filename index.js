@@ -32,7 +32,7 @@ for (const file of commandFiles) {
 }
 
 client.once('ready', async () => {
-    console.log('>> BOT IS ONLINE <<');
+    console.log('>> 機器人已上線 <<');
 
     const savedTickets = readTickets();
     let dataUpdated = false;
