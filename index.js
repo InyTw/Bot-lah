@@ -9,7 +9,8 @@ const {
     ActionRowBuilder,
     ButtonStyle,
     ChannelType,
-    PermissionsBitField
+    PermissionsBitField,
+    ActivityType
 } = require('discord.js');
 const { token } = require('./config.json');
 const { readTickets, writeTickets } = require('./storage');
@@ -32,6 +33,25 @@ for (const file of commandFiles) {
 }
 
 client.once('ready', async () => {
+    //-------------------------------------------------------------------------------------//
+    //client.user.setStatus('states'); 
+    //online:線上
+    //idle:優閒
+    //dnd:勿擾
+    //invisible:隱形
+    //
+    //client.user.setActivity('前綴後面的文字', { type: ActivityType.Exmple });
+    //Watching:將機器人的行為設置為正在看
+    //Listening:將機器人的行為設置為正在聽
+    //Streaming:將機器人的行為設置為正在直播
+    //Playing:將機器人的行為設置為正在玩
+    //Competing:將機器人的行為設置為競爭
+    //
+    //client.user.setPresence({ activities: [{ name: 'Exmple' }], status: 'states' });
+    //目前僅能設置「正在玩」
+    //-------------------------------------------------------------------------------------//
+    client.user.setStatus('dnd'); 
+    client.user.setActivity('InyTww', { type: ActivityType.Playing });
     console.log('>> BOT IS ONLINE <<');
 
     const savedTickets = readTickets();
