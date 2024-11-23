@@ -1,230 +1,150 @@
-const fs = require('fs');
-const path = require('path');
-const {
-    Client,
-    GatewayIntentBits,
-    Collection,
-    EmbedBuilder,
-    ButtonBuilder,
-    ActionRowBuilder,
-    ButtonStyle,
-    ChannelType,
-    PermissionsBitField,
-    ActivityType
-} = require('discord.js');
-const { token } = require('./config.json');
-const { readTickets, writeTickets } = require('./storage');
+//----------------------------------------------------//
+//     || Minecraft <===> Discord Server Bot ||       //
+//----------------------------------------------------//
+//                 Creator: InyTww                    //
+//         Discord:https://dsc.gg/discordmcbot        //
+//----------------------------------------------------//
+
+const { Client, Events, GatewayIntentBits, ActivityType, EmbedBuilder, SlashCommandBuilder, Role } = require('discord.js');
+const { token, id } = require('./config.json');
+
+//---------------------------------------------------//
+//           || 建立一個新的 Client 實例 ||            //
+//---------------------------------------------------//
+//                     預設如下
+//             (Discord Developer Portal的
+//             Privileged Gateway Intents
+//             下面的三個東西都要開啟才行):
+//             GatewayIntentBits.Guilds,
+//          GatewayIntentBits.GuildMembers,
+//         GatewayIntentBits.GuildMessages,
+//         GatewayIntentBits.MessageContent,
+//---------------------------------------------------//
 
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers,
-    ]
+  intents: [
+      GatewayIntentBits.Guilds,
+      GatewayIntentBits.GuildMembers,
+      GatewayIntentBits.GuildMessages,
+      GatewayIntentBits.MessageContent,
+    ],
 });
 
-client.commands = new Collection();
+//----------------------------------------------------//
+//            || 用BotToken登入Discord ||             //
+//---------------------------------------------------//
+//            預設: client.login(token);
+//---------------------------------------------------//
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commands.set(command.data.name, command);
+client.login(token);
+
+//---------------------------------------------------//
+//                || 設置機器人狀態 ||                 //
+//---------------------------------------------------//
+//               online:設置狀態為在線
+//               idle:設置狀態為閒置
+//              dnd:設置狀態為請勿打擾
+//          invisible:設置狀態為離線（隱形)
+//---------------------------------------------------//
+//             || 設置機器人這在做的事 ||              //
+//--------------------------------------------------//
+//         watching:將機器人的行為設置為正在看
+//         Listening:將機器人的行為設置為正在聽
+//        Streaming:將機器人的行為設置為正在直播
+//          Playing:將機器人的行為設置為正在玩
+//         Competing:將機器人的行為設置為競爭
+//             client.user.setActivity
+// ('前綴後面的文字', { type: ActivityType.Watching })
+//---------------------------------------------------//
+//             || 'Bot was Online'通知 ||            //
+//---------------------------------------------------//
+//            ex: console.log('>> word <<');          
+//               ex: console.log('WORD');
+//         ex: console.log('BOT WAS ONLINE');
+//---------------------------------------------------//
+
+client.once(Events.ClientReady, c => {
+    client.user.setStatus('dnd');
+    client.user.setActivity('月神', { type: ActivityType.Streaming });
+    console.log(' ');
+    console.log(' ');
+    console.log('>> DiscordBot online <<')
+    console.log(' ');
+    console.log(' ');
+
+});
+//---------------------------------------------------//
+//                    || Rules ||                    //
+//---------------------------------------------------//
+
+client.on(Events.MessageCreate, (message) => {
+  if (message.content === '!rules') {
+ message.channel.send('# Minecraft <===> Discord Bot  \n**Minecraft and Discord Bot Guild**\n\n# Guild Rule\n**1.DO NOT use unknown app or unknown links**\n**2.DO NOT attack other**\n3.**DO NOT use HackerCode**\n**4.DO NOT use other account and password**\n\n# Guild Commands\n``/help`` : <@1301480444382150728> can help you\n``/about`` : about this server\n``/embed-code`` : Embed Code\n``/button-code`` : Button-code\n\n@everyone\n\n-# InyTw_qt   UTF-8 2023/11/3 20:27');
+}
+});
+
+//---------------------------------------------------//
+//                     || 公告 ||                     //
+//---------------------------------------------------//
+
+client.on(Events.MessageCreate, (message) => {
+  if (message.content === '!公告') {
+ message.channel.send('');
 }
 
-client.once('ready', async () => {
-    //-------------------------------------------------------------------------------------//
-    //client.user.setStatus('states'); 
-    //online:線上
-    //idle:優閒
-    //dnd:勿擾
-    //invisible:隱形
-    //
-    //client.user.setActivity('前綴後面的文字', { type: ActivityType.Exmple });
-    //Watching:將機器人的行為設置為正在看
-    //Listening:將機器人的行為設置為正在聽
-    //Streaming:將機器人的行為設置為正在直播
-    //Playing:將機器人的行為設置為正在玩
-    //Competing:將機器人的行為設置為競爭
-    //
-    //client.user.setPresence({ activities: [{ name: 'Exmple' }], status: 'states' });
-    //目前僅能設置「正在玩」
-    //-------------------------------------------------------------------------------------//
-    client.user.setStatus('dnd'); 
-    client.user.setActivity('InyTww', { type: ActivityType.Playing });
-    console.log('>> BOT IS ONLINE <<');
-
-    const savedTickets = readTickets();
-    let dataUpdated = false;
-
-    for (const [interactionId, ticketData] of Object.entries(savedTickets)) {
-        const {
-            channelId,
-            messageId,
-            title,
-            description,
-            buttonText,
-            categoryName,
-            supportRoleId,
-            colorChoice,
-            buttonColorChoice,
-            buttonEmoji
-        } = ticketData;
-
-        const channel = client.channels.cache.get(channelId);
-
-        if (!channel) {
-            console.warn(`頻道 ID ${channelId} 找不到，跳過這個客服單。`);
-            continue;
-        }
-
-        let message;
-        try {
-            message = await channel.messages.fetch(messageId);
-            console.log(`成功取得訊息 ID ${messageId} 於頻道 ${channelId}`);
-        } catch (error) {
-            if (error.code === 10008) {
-                console.warn(`訊息 ID ${messageId} 不存在於頻道 ${channelId}，將重新發送訊息。`);
-            } else {
-                console.error(`無法取得訊息 ID ${messageId} 於頻道 ${channelId}：`, error);
-                continue;
-            }
-        }
-
-        if (!message) {
-            const embedColor = {
-                Red: '#FF0000',
-                Orange: '#FFA500',
-                Yellow: '#FFFF00',
-                'Light Yellow': '#FFFFE0',
-                'Dark Green': '#006400',
-                Green: '#008000',
-                'Light Green': '#90EE90',
-                Aqua: '#00FFFF',
-                'Light Blue': '#ADD8E6',
-                Blue: '#0000FF',
-                'Dark Blue': '#00008B',
-                Magenta: '#FF00FF',
-                Purple: '#800080',
-            }[colorChoice] || '#00FFFF';
-
-            const buttonStyle = {
-                Red: ButtonStyle.Danger,
-                Yellow: ButtonStyle.Secondary,
-                Green: ButtonStyle.Success,
-                Blue: ButtonStyle.Primary,
-                Gray: ButtonStyle.Secondary,
-            }[buttonColorChoice] || ButtonStyle.Primary;
-
-            const ticketEmbed = new EmbedBuilder()
-                .setTitle(title)
-                .setDescription(description)
-                .setColor(embedColor)
-                .setFooter({ text: 'emmmm', iconURL: '' });
-
-            const ticketButton = new ButtonBuilder()
-                .setCustomId(`create_ticket_${interactionId}`)
-                .setLabel(buttonText)
-                .setStyle(buttonStyle);
-
-            if (buttonEmoji) {
-                ticketButton.setEmoji(buttonEmoji);
-            }
-
-            const row = new ActionRowBuilder().addComponents(ticketButton);
-
-            message = await channel.send({ embeds: [ticketEmbed], components: [row] });
-            console.log(`新訊息已發送於頻道 ${channelId}，訊息 ID ${message.id}`);
-
-            savedTickets[interactionId].messageId = message.id;
-            dataUpdated = true;
-        }
-
-        const filter = i => i.customId === `create_ticket_${interactionId}`;
-        const collector = message.createMessageComponentCollector({ filter, time: 86400000 });
-
-        collector.on('collect', async i => {
-            const guild = i.guild;
-            const existingChannel = guild.channels.cache.find(channel => channel.name === `客服單-${i.user.id}`);
-            if (existingChannel) {
-                return i.reply({ content: '您已經有一個開啟的客服單', ephemeral: true });
-            }
-
-            const category = guild.channels.cache.find(c => c.name === categoryName && c.type === ChannelType.GuildCategory);
-
-            if (!category) {
-                return i.reply({ content: `找不到類別: ${categoryName}`, ephemeral: true });
-            }
-
-            const newChannel = await guild.channels.create({
-                name: `客服單-${i.user.username}`,
-                type: ChannelType.GuildText,
-                parent: category.id,
-                permissionOverwrites: [
-                    {
-                        id: guild.id,
-                        deny: [PermissionsBitField.Flags.ViewChannel],
-                    },
-                    {
-                        id: i.user.id,
-                        allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory],
-                    },
-                    {
-                        id: supportRoleId,
-                        allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory],
-                    },
-                ],
-            });
-
-            await newChannel.send(`<@&${supportRoleId}> ${i.user} 已建立客服單`);
-
-            const originalMessage = await i.message.fetch();
-            const updatedEmbed = EmbedBuilder.from(originalMessage.embeds[0])
-                .setTitle(`主題 ${title}`)
-                .setDescription(`客服單開啟者: ${i.user.username}`);
-
-            await originalMessage.edit({ embeds: [updatedEmbed] });
-
-            i.reply({ content: `已建立客服單: ${newChannel}`, ephemeral: true });
-        });
-
-        collector.on('end', collected => {
-            console.log(`收集器結束，共收集了 ${collected.size} 個互動。`);
-        });
-    }
-
-    if (dataUpdated) {
-        console.log('更新 data.json 中的訊息 ID...');
-        writeTickets(savedTickets);
-    }
 });
 
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isCommand()) return;
+//---------------------------------------------------//
+//                 || 機器人自動回復 ||                //
+//---------------------------------------------------//
+//ex:
+//    client.on('message, (message) => {
+//       if (message.content === '!word') {
+//     message.channel.send('word-2');
+//    }
+//   });
+//---------------------------------------------------//
 
-    const command = client.commands.get(interaction.commandName);
+    client.on(Events.MessageCreate, (message) => {
+        if (message.content === ':P') {
+       message.channel.send('lol');
+     }
+    });
 
-    if (!command) return;
+    client.on(Events.MessageCreate, (message) => {
+      if (message.content === '💀') {
+     message.channel.send('💀💀\nschool = skull');
+   }
+  });
 
-    try {
-        await command.execute(interaction);
-    } catch (error) {
-        console.error(error);
-        await interaction.reply({ content: '執行指令時出現錯誤', ephemeral: true });
-    }
-});
+    client.on(Events.MessageCreate, (message) => {
+      if (message.content === '!help') {
+        message.channel.send('? what ?');
+      }
+    });
 
-// 成員加入伺服器時
+    client.on(Events.MessageCreate, (message) => {
+      if (message.content === '$ip') {
+        message.channel.send('IP: mcofc.minecraft.best');
+      }
+    });
+
+
+//----------------------------------------------------//
+//              Member join and leave                 //
+//----------------------------------------------------//
+
 client.on('guildMemberAdd', member => {
   const welcomeEmbed = new EmbedBuilder()
     .setColor('#00FF00')
     .setTitle('有人加入了')
-    .setDescription(`${member.user.tag} \n**加入了伺服器╰(*°▽°*)╯**`)
+    .setDescription(`歡迎🙌 ${member.user} \n**加入 石器起源
+      記得去 ⁠https://discord.com/channels/1302432939241504821/1302601550434406410 拿基本身份,看規則和申請表單,enjoy**`)
     .setThumbnail(member.user.displayAvatarURL())
     .setTimestamp();
 
   // 使用頻道ID發送訊息
-  const channel = member.guild.channels.cache.get('1256807394701217855'); // 加入通知頻道ID
+  const channel = member.guild.channels.cache.get('1307247950136610826'); // 加入通知頻道ID
   if (channel) {
     channel.send({ embeds: [welcomeEmbed] });
   }
@@ -235,16 +155,24 @@ client.on('guildMemberRemove', member => {
   const goodbyeEmbed = new EmbedBuilder()
     .setColor('#FF0000')
     .setTitle('有人退出了！！！')
-    .setDescription(`${member.user.tag} \n**離開了我們(┬┬﹏┬┬)**`)
+    .setDescription(`${member.user} \n**離開了 石器起源(┬┬﹏┬┬)**`)
     .setThumbnail(member.user.displayAvatarURL())
     .setTimestamp();
 
   // 使用頻道ID發送訊息
-  const channel = member.guild.channels.cache.get('1256807394701217855'); // 退出通知頻道ID
+  const channel = member.guild.channels.cache.get('1302907689839362058'); // 退出通知頻道ID
   if (channel) {
     channel.send({ embeds: [goodbyeEmbed] });
   }
 });
 
+client.on('channelPinsUpdate', (channel, data) => {});
 
-client.login(token);
+function msToHMS(ms) {
+  let seconds = ms / 1000;
+  const hours = parseInt( seconds / 3600 );
+  seconds = seconds % 3600;
+  const minutes = parseInt( seconds / 60 );
+  seconds = seconds % 60;
+  return(`${hours}:${minutes}:${~~(seconds)}`);
+}
