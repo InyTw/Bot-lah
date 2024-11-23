@@ -79,7 +79,7 @@ client.once(Events.ClientReady, c => {
 
 client.on(Events.MessageCreate, (message) => {
   if (message.content === '!rules') {
- message.channel.send('# Minecraft <===> Discord Bot  \n**Minecraft and Discord Bot Guild**\n\n# Guild Rule\n**1.DO NOT use unknown app or unknown links**\n**2.DO NOT attack other**\n3.**DO NOT use HackerCode**\n**4.DO NOT use other account and password**\n\n# Guild Commands\n``/help`` : <@1301480444382150728> can help you\n``/about`` : about this server\n``/embed-code`` : Embed Code\n``/button-code`` : Button-code\n\n@everyone\n\n-# InyTw_qt   UTF-8 2023/11/3 20:27');
+ message.channel.send('');
 }
 });
 
