@@ -139,7 +139,7 @@ client.on('guildMemberAdd', member => {
     .setColor('#00FF00')
     .setTitle('有人加入了')
     .setDescription(`歡迎🙌 ${member.user} \n**加入 石器起源
-      記得去 ⁠https://discord.com/channels/1302432939241504821/1302601550434406410 拿基本身份,看規則和申請表單,enjoy**`)
+      記得去 ⁠https://discord.com/channels/1302432939241504821/1302601550434406410 拿基本身份,看規則和申請表單\nenjoy！！！**`)
     .setThumbnail(member.user.displayAvatarURL())
     .setTimestamp();
 
