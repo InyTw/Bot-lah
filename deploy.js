@@ -4,7 +4,12 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 // 取得 commands 資料夾中的所有指令
-const commands = [];
+const commands = [
+    {
+        name: 'rules',
+        description: 'GroupRules',
+    }
+];
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
@@ -22,7 +27,7 @@ const rest = new REST({ version: '10' }).setToken(token);
     try {
         console.log('開始重新加載所有指令');
 
-        await rest.put(Routes.applicationCommands(clientId), {
+        await rest.put(Routes.applicationCommands(id), {
             body: commands,
         });
 

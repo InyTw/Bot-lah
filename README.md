@@ -1,4 +1,3 @@
-# cloudmoon
-ClouMoon server BOT
-server BOT
-Create By. Xiaocker
+# DIscord Bot(無聊做的)
+
+***DIscord Bot (無聊做的)***
