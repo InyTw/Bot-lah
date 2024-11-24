@@ -89,9 +89,9 @@ client.on(Events.MessageCreate, (message) => {
 
 client.on(Events.MessageCreate, (message) => {
   if (message.content === '!公告') {
- message.channel.send('');
+ message.channel.send
+ ('');
 }
-
 });
 
 //---------------------------------------------------//
