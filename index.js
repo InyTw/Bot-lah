@@ -1,20 +1,9 @@
-//----------------------------------------------------//
-//     || Minecraft <===> Discord Server Bot ||       //
-//----------------------------------------------------//
-//                 Creator: InyTww                    //
-//         Discord:https://dsc.gg/discordmcbot        //
-//----------------------------------------------------//
-
-const { Client, Events, GatewayIntentBits, ActivityType, EmbedBuilder, SlashCommandBuilder, Role } = require('discord.js');
+const { Client, Events, GatewayIntentBits, ActivityType, EmbedBuilder } = require('discord.js');
 const { token, id } = require('./config.json');
 
 //---------------------------------------------------//
 //           || 建立一個新的 Client 實例 ||            //
 //---------------------------------------------------//
-//                     預設如下
-//             (Discord Developer Portal的
-//             Privileged Gateway Intents
-//             下面的三個東西都要開啟才行):
 //             GatewayIntentBits.Guilds,
 //          GatewayIntentBits.GuildMembers,
 //         GatewayIntentBits.GuildMessages,
@@ -32,8 +21,6 @@ const client = new Client({
 
 //----------------------------------------------------//
 //            || 用BotToken登入Discord ||             //
-//---------------------------------------------------//
-//            預設: client.login(token);
 //---------------------------------------------------//
 
 client.login(token);
@@ -56,16 +43,12 @@ client.login(token);
 //             client.user.setActivity
 // ('前綴後面的文字', { type: ActivityType.Watching })
 //---------------------------------------------------//
-//             || 'Bot was Online'通知 ||            //
-//---------------------------------------------------//
-//            ex: console.log('>> word <<');          
-//               ex: console.log('WORD');
-//         ex: console.log('BOT WAS ONLINE');
+//             || 'Bot Online'通知 ||            //
 //---------------------------------------------------//
 
 client.once(Events.ClientReady, c => {
     client.user.setStatus('dnd');
-    client.user.setActivity('月神', { type: ActivityType.Streaming });
+    client.user.setActivity('Pronhub.com', { type: ActivityType.Watching });
     console.log(' ');
     console.log(' ');
     console.log('>> DiscordBot online <<')
@@ -97,13 +80,6 @@ client.on(Events.MessageCreate, (message) => {
 //---------------------------------------------------//
 //                 || 機器人自動回復 ||                //
 //---------------------------------------------------//
-//ex:
-//    client.on('message, (message) => {
-//       if (message.content === '!word') {
-//     message.channel.send('word-2');
-//    }
-//   });
-//---------------------------------------------------//
 
     client.on(Events.MessageCreate, (message) => {
         if (message.content === ':P') {
@@ -117,18 +93,30 @@ client.on(Events.MessageCreate, (message) => {
    }
   });
 
-    client.on(Events.MessageCreate, (message) => {
-      if (message.content === '!help') {
-        message.channel.send('? what ?');
-      }
-    });
-
-    client.on(Events.MessageCreate, (message) => {
-      if (message.content === '$ip') {
-        message.channel.send('IP: mcofc.minecraft.best');
-      }
-    });
-
+  client.on('messageCreate', (message) => {
+    // Ignore bot messages
+    if (message.author.bot) return;
+  });
+  
+  client.on(Events.MessageCreate, (message)=> {
+      if (message.content === "030") (
+          message.reply("O.o")
+      );
+  });
+  
+  client.on(Events.MessageCreate, (message)=> {
+    if (message.content === "$help") (
+        message.reply("# Help\n"+
+          "**` $srv-info `**  : **server's IP and version**"
+        )
+    );
+  });
+  
+  client.on(Events.MessageCreate, (message)=> {
+    if (message.content === "$srv-info") (
+        message.reply("# SRV-info\n```js\nIP: 'xaiomi.minecraft.best'\n```\n```js\nversion: '1.21'\n```")
+    );
+  });
 
 //----------------------------------------------------//
 //              Member join and leave                 //
@@ -138,13 +126,12 @@ client.on('guildMemberAdd', member => {
   const welcomeEmbed = new EmbedBuilder()
     .setColor('#00FF00')
     .setTitle('有人加入了')
-    .setDescription(`歡迎🙌 ${member.user} \n**加入 石器起源
-      記得去 ⁠https://discord.com/channels/1302432939241504821/1302601550434406410 拿基本身份,看規則和申請表單\nenjoy！！！**`)
+    .setDescription(`歡迎🙌 ${member.user}`)
     .setThumbnail(member.user.displayAvatarURL())
     .setTimestamp();
 
   // 使用頻道ID發送訊息
-  const channel = member.guild.channels.cache.get('1307247950136610826'); // 加入通知頻道ID
+  const channel = member.guild.channels.cache.get('1323289509655478304'); // 加入通知頻道ID
   if (channel) {
     channel.send({ embeds: [welcomeEmbed] });
   }
@@ -155,16 +142,16 @@ client.on('guildMemberRemove', member => {
   const goodbyeEmbed = new EmbedBuilder()
     .setColor('#FF0000')
     .setTitle('有人退出了！！！')
-    .setDescription(`${member.user} \n**離開了 石器起源(┬┬﹏┬┬)**`)
+    .setDescription(`${member.user} \n**離開了我們(┬┬﹏┬┬)**`)
     .setThumbnail(member.user.displayAvatarURL())
     .setTimestamp();
 
-  // 使用頻道ID發送訊息
-  const channel = member.guild.channels.cache.get('1302907689839362058'); // 退出通知頻道ID
-  if (channel) {
-    channel.send({ embeds: [goodbyeEmbed] });
-  }
-});
+    // 使用頻道ID發送訊息
+    const channel = member.guild.channels.cache.get('1323289509655478304'); // 加入通知頻道ID
+    if (channel) {
+      channel.send({ embeds: [goodbyeEmbed] });
+    }
+  });
 
 client.on('channelPinsUpdate', (channel, data) => {});
 
