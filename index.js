@@ -51,19 +51,12 @@ client.once(Events.ClientReady, c => {
     client.user.setActivity('Pronhub.com', { type: ActivityType.Watching });
     console.log(' ');
     console.log(' ');
-    console.log('>> DiscordBot online <<')
+    console.log('--------------------------');
+    console.log(` >> ${c.user.tag} online <<`)
+    console.log('--------------------------');
     console.log(' ');
     console.log(' ');
 
-});
-//---------------------------------------------------//
-//                    || Rules ||                    //
-//---------------------------------------------------//
-
-client.on(Events.MessageCreate, (message) => {
-  if (message.content === '!rules') {
- message.channel.send('');
-}
 });
 
 //---------------------------------------------------//
@@ -71,9 +64,9 @@ client.on(Events.MessageCreate, (message) => {
 //---------------------------------------------------//
 
 client.on(Events.MessageCreate, (message) => {
-  if (message.content === '!公告') {
+  if (message.content === '!') {
  message.channel.send
- ('');
+ (' ');
 }
 });
 
@@ -81,14 +74,14 @@ client.on(Events.MessageCreate, (message) => {
 //                 || 機器人自動回復 ||                //
 //---------------------------------------------------//
 
-    client.on(Events.MessageCreate, (message) => {
-        if (message.content === ':P') {
+  client.on(Events.MessageCreate, (message) => {
+    if (message.content === ':P') {
        message.channel.send('lol');
      }
     });
 
-    client.on(Events.MessageCreate, (message) => {
-      if (message.content === '💀') {
+  client.on(Events.MessageCreate, (message) => {
+    if (message.content === '💀') {
      message.channel.send('💀💀\nschool = skull');
    }
   });
