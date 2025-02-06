@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, ActivityType, EmbedBuilder } = require('discord.js');
+const { Client, Events, GatewayIntentBits, ActivityType, EmbedBuilder, InteractionCollector } = require('discord.js');
 const { token, id } = require('./config.json');
 
 //---------------------------------------------------//
@@ -48,16 +48,66 @@ client.login(token);
 
 client.once(Events.ClientReady, c => {
     client.user.setStatus('dnd');
-    client.user.setActivity('Pronhub.com', { type: ActivityType.Watching });
+    client.user.setActivity('Pornhub.com', { type: ActivityType.Watching });
     console.log(' ');
     console.log(' ');
-    console.log('--------------------------');
-    console.log(` >> ${c.user.tag} online <<`)
-    console.log('--------------------------');
+    console.log('|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|');
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                  ============================================================                                                      |`);
+    console.log(`|                                                  ==                                                        ==                                                      |`);
+    console.log(`|                                                  ==                                                        ==                                                      |`);
+    console.log(`|                                                  ==                                                        ==                                                      |`);
+    console.log(`|                                                  ==       ==========================================       ==                                                      |`);
+    console.log(`|                                                  ==       ==                                      ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==                                      ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==                                      ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==   --------------------------------   ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==   --------------------------------   ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==   --   >> ${c.user.tag} online << --   ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==   --------------------------------   ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==   --------------------------------   ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==                                      ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==                                      ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==                                      ==       ==                                                      |`);
+    console.log(`|                                                  ==       ==========================================       ==                                                      |`);
+    console.log(`|                                                  ==                                                        ==                                                      |`);
+    console.log(`|                                                  ==                                                        ==                                                      |`);
+    console.log(`|                                                  ==                                                        ==                                                      |`);
+    console.log(`|                                                  ============================================================                                                      |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log(`|                                                                                                                                                                    |`);
+    console.log('|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|');
     console.log(' ');
     console.log(' ');
 
 });
+
+//----------------------------------------------------//
+//         || /ping command, reply pong! ||          //
+//---------------------------------------------------//
+
+client.on("interactionCreate", async (Interaction) => {
+  if(Interaction.isCommand()) {
+    if(Interaction.commandName === "ping") {
+      Interaction.reply({ content: "Pong ! ! !", ephemeral: true })
+    }
+  }
+})
+
+client.on("interactionCreate", async (Interaction) => {
+  if(Interaction.isCommand()) {
+    if(Interaction.commandName === "nmsl") {
+      Interaction.reply("Mute ! ! !, @everyone")
+    }
+  }
+})
 
 //---------------------------------------------------//
 //                     || 公告 ||                     //

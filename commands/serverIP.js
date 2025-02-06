@@ -3,8 +3,8 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('server-ip')
-        .setDescription('伺服器 IP'),
+        .setName('serverip')
+        .setDescription('Minecraft server IP'),
 
     async execute(interaction) {
           const ipEmbed = new EmbedBuilder()
