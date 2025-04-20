@@ -38,6 +38,7 @@ node .
 
 > if you want to use your bot, plz go to [Discord developer Portal](https://discord.com/developers/applications) create a bot
 > and go to `Bot` to get Token
-> (if you can't create create a discord bot, this is a nice video []())
+> (if you can't create create a discord bot, this is a nice video)
+> [How to create a discord bot](https://youtu.be/zrNloK9b1ro?si=Khlie8ExWLNWhz5p)
 
 </div>
