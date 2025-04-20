@@ -126,6 +126,7 @@ client.on(Events.MessageCreate, (message) => {
 //              Member join and leave                 //
 //----------------------------------------------------//
 
+// join
 client.on('guildMemberAdd', member => {
   const welcomeEmbed = new EmbedBuilder()
     .setColor('#00FF00')
@@ -134,14 +135,14 @@ client.on('guildMemberAdd', member => {
     .setThumbnail(member.user.displayAvatarURL())
     .setTimestamp();
 
-  // 使用頻道ID發送訊息
-  const channel = member.guild.channels.cache.get('1363521108996919306'); // 加入通知頻道ID
+  // use chat id (JOIN)
+  const channel = member.guild.channels.cache.get('1363521108996919306'); // <== join's chat ID
   if (channel) {
     channel.send({ embeds: [welcomeEmbed] });
   }
 });
 
-// 成員退出伺服器時
+// leave
 client.on('guildMemberRemove', member => {
   const goodbyeEmbed = new EmbedBuilder()
     .setColor('#FF0000')
@@ -150,8 +151,8 @@ client.on('guildMemberRemove', member => {
     .setThumbnail(member.user.displayAvatarURL())
     .setTimestamp();
 
-    // 使用頻道ID發送訊息
-    const channel = member.guild.channels.cache.get('1363521108996919306'); // 加入通知頻道ID
+    // use chat id (LEAVE)
+    const channel = member.guild.channels.cache.get('1363521108996919306'); // <== leave's chat ID
     if (channel) {
       channel.send({ embeds: [goodbyeEmbed] });
     }
