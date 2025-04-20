@@ -52,6 +52,8 @@ node .
 > go to your discord Guild 
 > and `right click` your guild icon to copy `Guild ID`
 
+<br>
+<br>
 
 © 2025 InyTw, BoringSrv power
 </div>
