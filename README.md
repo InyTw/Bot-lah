@@ -3,4 +3,10 @@
 
 Creator: [InyTw](https://youtube.com/@InyTw87)
 
+<h3>if you use vs code to turn on the bot, plz type:</h3>
+
+```bash
+node index.js
+```
+
 </div>
