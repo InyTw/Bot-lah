@@ -1,4 +1,5 @@
-# DIscord Bot(無聊做的)
+<div align="center">
+    <h1 id="Bot-lah">Bot-Lah</h1>
 
-***DIscord Bot (無聊做的) ***
- 
+    [status](https://youtube.com)
+</div>

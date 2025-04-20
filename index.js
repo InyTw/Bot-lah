@@ -120,11 +120,7 @@ client.on(Events.MessageCreate, (message) => {
     );
   });
   
-  client.on(Events.MessageCreate, (message)=> {
-    if (message.content === "$srv-info") (
-        message.reply("# SRV-info\n```js\nIP: 'xaiomi.minecraft.best'\n```\n```js\nversion: '1.21'\n```")
-    );
-  });
+
 
 //----------------------------------------------------//
 //              Member join and leave                 //
@@ -139,7 +135,7 @@ client.on('guildMemberAdd', member => {
     .setTimestamp();
 
   // 使用頻道ID發送訊息
-  const channel = member.guild.channels.cache.get('1323289509655478304'); // 加入通知頻道ID
+  const channel = member.guild.channels.cache.get('1363521108996919306'); // 加入通知頻道ID
   if (channel) {
     channel.send({ embeds: [welcomeEmbed] });
   }
@@ -155,7 +151,7 @@ client.on('guildMemberRemove', member => {
     .setTimestamp();
 
     // 使用頻道ID發送訊息
-    const channel = member.guild.channels.cache.get('1323289509655478304'); // 加入通知頻道ID
+    const channel = member.guild.channels.cache.get('1363521108996919306'); // 加入通知頻道ID
     if (channel) {
       channel.send({ embeds: [goodbyeEmbed] });
     }
