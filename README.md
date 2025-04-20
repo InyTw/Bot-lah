@@ -45,7 +45,7 @@ node .
 ### Discord Bot client ID
 
 > go to [Discord developer Portal](https://discord.com/developers/applications)
-> and go to `OAuth2` to get `ClientID`
+> and go to `OAuth2` copy `ClientID`
 > go to `config.json` to change `ClientID`
 
 ### Discord Guild ID
