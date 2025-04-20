@@ -6,11 +6,11 @@ Creator: [InyTw](https://youtube.com/@InyTw87)
 
 ### Usage
 
-> if you use vs code to turn on the bot, plz type:
+> if you use vs code to run the bot, plz type:
 ```bash
 node index.js
 ```
-or
+> or
 ```bash
 node .
 ```
