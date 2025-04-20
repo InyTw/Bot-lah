@@ -9,9 +9,9 @@ Creator: [InyTw](https://youtube.com/@InyTw87)
 > if you use vs code to turn on the bot, plz type:
 ```bash
 node index.js
-
-# or
-
+```
+or
+```bash
 node .
 ```
 ### Change leave's & join's chat ID
