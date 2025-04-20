@@ -2,7 +2,7 @@
     <h1 id="Bot-lah">Bot-Lah</h1>
 
 Creator: [InyTw](https://youtube.com/@InyTw87) 
-<br>BoringSRV: [Discord](https://dsc.gg/boringsrv) | [YouTube](https://youtube.com/@Boringsrv-tw)
+<br>BoringSRV: [Discord](https://dsc.gg/boringsrv) || [YouTube](https://youtube.com/@Boringsrv-tw)
 
 ### Usage
 
