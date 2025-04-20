@@ -2,8 +2,9 @@
     <h1 id="Bot-lah">Bot-Lah</h1>
 
 Creator: [InyTw](https://youtube.com/@InyTw87)
+BoringSRV: [Discord](https://dsc.gg/boringsrv) [YouTube](https://youtube.com/@Boringsrv-tw)
 
-## Usage
+### Usage
 
 > if you use vs code to turn on the bot, plz type:
 ```bash
@@ -13,7 +14,7 @@ node index.js
 
 node .
 ```
-## Change leave's & join's chat ID
+### Change leave's & join's chat ID
 > if you need change chat id
 > you can go to `index.js` and edit `// <== join's & leave's chat id`
 
@@ -32,5 +33,11 @@ node .
     channel.send({ embeds: [goodbyeEmbed] });
   }
 ```
+
+### Discord Bot Token
+
+> if you want to use your bot, plz go to [Discord developer Portal](https://discord.com/developers/applications) create a bot
+> and go to `Bot` to get Token
+> (if you can't create create a discord bot, this is a nice video []())
 
 </div>
