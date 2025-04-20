@@ -1,8 +1,8 @@
 <div align="center">
     <h1 id="Bot-lah">Bot-Lah</h1>
 
-Creator: [InyTw](https://youtube.com/@InyTw87)
-BoringSRV: [Discord](https://dsc.gg/boringsrv) [YouTube](https://youtube.com/@Boringsrv-tw)
+Creator: [InyTw](https://youtube.com/@InyTw87) 
+<br>BoringSRV: [Discord](https://dsc.gg/boringsrv) | [YouTube](https://youtube.com/@Boringsrv-tw)
 
 ### Usage
 
@@ -20,7 +20,7 @@ node .
 
 ```js
   // use chat id (JOIN)
-  const channel = member.guild.channels.cache.get('1363521108996919306'); // <== join's chat ID
+  const channel = member.guild.channels.cache.get('-------------------'); // <== join's chat ID
   if (channel) {
     channel.send({ embeds: [welcomeEmbed] });
   }
@@ -28,7 +28,7 @@ node .
 // and 
 
     // use chat id (LEAVE)
-  const channel = member.guild.channels.cache.get('1363521108996919306'); // <== leave's chat ID
+  const channel = member.guild.channels.cache.get('-------------------'); // <== leave's chat ID
   if (channel) {
     channel.send({ embeds: [goodbyeEmbed] });
   }
