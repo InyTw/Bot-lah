@@ -55,6 +55,27 @@ node .
 # DiscordSRV (Minecraft Plugin)
 > [Download DiscordSRV](https://www.spigotmc.org/resources/discordsrv.18494/)
 
+# Usage
+> download `DiscordSRV` in `plugins` folder
+> and restart server (if you use PlugmanX, you can type `/plugman load DiscordSRV`)
+
+>go to discordsrv's folder and edit `config.yml`
+> go to [Discord developer Portal](https://discord.com/developers/applications) copy bot token
+> paste the token
+
+<h6>EX:</h6>
+
+```yml
+BotToken: "BOTTOKEN"
+
+```
+
+### WARNINNG
+
+> Don't touch pls
+```yml
+ConfigVersion: ${version}
+```
 
 <br>
 <br>
