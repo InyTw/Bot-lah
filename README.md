@@ -14,6 +14,37 @@ node index.js
 ```bash
 node .
 ```
+
+> if you want to stop the bot
+> plz use `Ctrl+C`
+
+### Discord-Bot Stutas & Activity
+
+> go to index.js and find:
+
+```js
+client.once(Events.ClientReady, c => {
+    client.user.setStatus('dnd'); //<---
+    client.user.setActivity('Hi, im am Bot !', { type: ActivityType.online }); // <---
+    console.log(' ');
+    console.log(' ${c.user.tag} is online ');
+
+});
+
+```
+#### Bot's Stutas
+> Online
+> idle
+> dnd
+> invisible
+
+#### Bot's Activity
+> watching
+> Listening
+> Streaming
+> Playing
+> Competing
+
 ### Change leave's & join's chat ID
 > if you need to change chat id
 > you can go to `index.js` and edit `// <== join's & leave's chat id`
@@ -55,7 +86,7 @@ node .
 # DiscordSRV (Minecraft Plugin)
 > [Download DiscordSRV](https://www.spigotmc.org/resources/discordsrv.18494/)
 
-# Usage
+### Usage
 > download `DiscordSRV` in `plugins` folder
 > and restart server (if you use PlugmanX, you can type `/plugman load DiscordSRV`)
 
@@ -70,12 +101,57 @@ BotToken: "BOTTOKEN"
 
 ```
 
-### WARNINNG
+#### WARNINNG
 
 > Don't touch pls
 ```yml
 ConfigVersion: ${version}
 ```
+
+### Chat ID
+
+> go to your discord Guild and right click your MC-chat to copy Chat ID
+> and go to discordsrv's folder and edit `config.yml`
+
+```yml
+# The first part of channel pairs is not the Discord channel name!
+# Run "/discord reload" after changing this option to apply
+Channels: {"global": "000000000000000000"}
+```
+### Console-Chat ID
+
+> you can craeate a console-chat to copy Chat ID
+> and go to discordsrv's folder and edit `config.yml`
+
+```yml
+# Console channel numerical ID (NOT NAME), leave blank to disable the console channel all together
+DiscordConsoleChannelId: "000000000000000000" # <---
+```
+
+### Invitation link
+> you can edit this
+
+>EX:
+
+```yml
+DiscordInviteLink: "https://dsc.gg/boringsrv"
+```
+
+### Webhook Delivery
+
+> Plz edit webhook to true in `config.yml` :
+
+```yml
+Experiment_WebhookChatMessageDelivery: true
+Experiment_WebhookChatMessageUsernameFormat: "%displayname%"
+Experiment_WebhookChatMessageFormat: "%message%"
+Experiment_WebhookChatMessageUsernameFromDiscord: true
+Experiment_WebhookChatMessageAvatarFromDiscord: true
+Experiment_WebhookChatMessageUsernameFilters: {}
+```
+### Game Information
+> (You can do Not set this, bcs you have use `index.js` to run Stutas & Activity)
+
 
 <br>
 <br>
