@@ -66,13 +66,6 @@ client.on("interactionCreate", async (Interaction) => {
   }
 })
 
-client.on("interactionCreate", async (Interaction) => {
-  if(Interaction.isCommand()) {
-    if(Interaction.commandName === "nmsl") {
-      Interaction.reply("Mute ! ! !, @everyone")
-    }
-  }
-})
 
 //---------------------------------------------------//
 //                     || 公告 ||                     //
