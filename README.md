@@ -52,6 +52,10 @@ node .
 > go to your discord Guild 
 > and `right click` your guild icon to copy `Guild ID`
 
+# DiscordSRV (Minecraft Plugin)
+> [Download DiscordSRV](https://www.spigotmc.org/resources/discordsrv.18494/)
+
+
 <br>
 <br>
 <h6>© 2025 InyTw, BoringSrv power</h6>
