@@ -55,4 +55,4 @@ node .
 </div>
 <br>
 <br>
-© 2025 InyTw, BoringSrv power
+<h6>© 2025 InyTw, BoringSrv power</h6>
