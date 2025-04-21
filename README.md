@@ -53,4 +53,6 @@ node .
 > and `right click` your guild icon to copy `Guild ID`
 
 </div>
+<br>
+<br>
 © 2025 InyTw, BoringSrv power
