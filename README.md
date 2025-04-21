@@ -33,17 +33,17 @@ client.once(Events.ClientReady, c => {
 
 ```
 #### Bot's Stutas
-> Online
-> idle
-> dnd
-> invisible
+> `Online`
+> `idle`
+> `dnd`
+> `invisible`
 
 #### Bot's Activity
-> watching
-> Listening
-> Streaming
-> Playing
-> Competing
+> `watching`
+> `Listening`
+> `Streaming`
+> `Playing`
+> `Competing`
 
 ### Change leave's & join's chat ID
 > if you need to change chat id
