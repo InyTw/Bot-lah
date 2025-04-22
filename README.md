@@ -128,7 +128,7 @@ Channels: {"global": "000000000000000000"}
 DiscordConsoleChannelId: "000000000000000000" # <---
 ```
 
-### Invitation link
+### Invitation link~~
 > you can edit this
 
 >EX:
@@ -142,16 +142,24 @@ DiscordInviteLink: "https://dsc.gg/boringsrv"
 > Plz edit webhook to true in `config.yml` :
 
 ```yml
-Experiment_WebhookChatMessageDelivery: true
-Experiment_WebhookChatMessageUsernameFormat: "%displayname%"
+Experiment_WebhookChatMessageDelivery: true    # <--
+Experiment_WebhookChatMessageUsernameFormat: "%displayname%" ~~
 Experiment_WebhookChatMessageFormat: "%message%"
-Experiment_WebhookChatMessageUsernameFromDiscord: true
-Experiment_WebhookChatMessageAvatarFromDiscord: true
+Experiment_WebhookChatMessageUsernameFromDiscord: true     # <--
+Experiment_WebhookChatMessageAvatarFromDiscord: true     # <--~
 Experiment_WebhookChatMessageUsernameFilters: {}
 ```
 ### Game Information
 > (You can do Not set this, bcs you have use `index.js` to run Stutas & Activity)
+> DiscordGameStatus: Text to display. Can be a single value e.g. "Minecraft", or multiple values e.g. ["Minecraft", "yourip.changeme.com"]
+> DiscordOnlineStatus: Activity status to display. This must be one of the following: ONLINE, DND, IDLE or INVISIBLE
+> StatusUpdateRateInMinutes: How frequently to cycle the status
 
+```yml
+DiscordGameStatus: ["playing Minecraft"]
+DiscordOnlineStatus: ONLINE
+StatusUpdateRateInMinutes: 2
+```
 
 <br>
 <br>
