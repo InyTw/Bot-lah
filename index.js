@@ -1,3 +1,9 @@
+//----------------------------------------------------//
+//       || GitHub: github.com/InyTw/Bot-lah ||       //
+//               || Creator: InyTw ||                 //
+//          || YouTube: youtube.com/@InyTw ||         //
+//----------------------------------------------------//
+
 const { Client, Events, GatewayIntentBits, ActivityType, EmbedBuilder, InteractionCollector } = require('discord.js');
 const { token, id } = require('./config.json');
 
