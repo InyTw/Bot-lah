@@ -56,7 +56,7 @@ client.once(Events.ClientReady, c => {
     client.user.setStatus('dnd');
     client.user.setActivity('Pornhub.com', { type: ActivityType.Watching });
     console.log(' ');
-    console.log(' ${c.user.tag} is online ');
+    console.log(` ${c.user.tag} is online `);
 
 });
 
