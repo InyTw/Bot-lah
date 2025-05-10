@@ -5,7 +5,9 @@
 //----------------------------------------------------//
 
 const { Client, Events, GatewayIntentBits, ActivityType, EmbedBuilder, InteractionCollector } = require('discord.js');
-const { token, id } = require('./config.json');
+const fs = require('node:fs');
+const path = require('node:path');
+const { token } = require('./config.json');
 
 //---------------------------------------------------//
 //           || 建立一個新的 Client 實例 ||            //
@@ -49,7 +51,7 @@ client.login(token);
 //             client.user.setActivity
 // ('前綴後面的文字', { type: ActivityType.Watching })
 //---------------------------------------------------//
-//             || 'Bot Online'通知 ||            //
+//               || 'Bot Online'通知 ||              //
 //---------------------------------------------------//
 
 client.once(Events.ClientReady, c => {
@@ -60,110 +62,62 @@ client.once(Events.ClientReady, c => {
 
 });
 
-//----------------------------------------------------//
-//         || /ping command, reply pong! ||          //
-//---------------------------------------------------//
+client.commands = new Collection();
 
-client.on("interactionCreate", async (Interaction) => {
-  if(Interaction.isCommand()) {
-    if(Interaction.commandName === "ping") {
-      Interaction.reply({ content: "Pong ! ! !", ephemeral: true })
-    }
-  }
-})
-
-
-//---------------------------------------------------//
-//                     || 公告 ||                     //
-//---------------------------------------------------//
-
-client.on(Events.MessageCreate, (message) => {
-  if (message.content === '!') {
- message.channel.send
- (' ');
+// 讀取指令
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.data.name, command);
 }
+
+// 指令處理
+client.on(Events.InteractionCreate, async interaction => {
+  if (!interaction.isChatInputCommand()) return;
+  const command = client.commands.get(interaction.commandName);
+  if (!command) return;
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({ content: '執行指令時出錯。', ephemeral: true });
+  }
 });
 
-//---------------------------------------------------//
-//                 || 機器人自動回復 ||                //
-//---------------------------------------------------//
+//welcome message catch
+const fs = require('fs');
+const path = require('path');
+const welcomePath = path.join(__dirname, 'data', 'welcome.json');
 
-  client.on(Events.MessageCreate, (message) => {
-    if (message.content === ':P') {
-       message.channel.send('lol');
-     }
-    });
-
-  client.on(Events.MessageCreate, (message) => {
-    if (message.content === '💀') {
-     message.channel.send('💀💀\nschool = skull');
-   }
-  });
-
-  client.on('messageCreate', (message) => {
-    // Ignore bot messages
-    if (message.author.bot) return;
-  });
-  
-  client.on(Events.MessageCreate, (message)=> {
-      if (message.content === "030") (
-          message.reply("O.o")
-      );
-  });
-  
-  client.on(Events.MessageCreate, (message)=> {
-    if (message.content === "$help") (
-        message.reply("# Help\n"+
-          "**` $srv-info `**  : **server's IP and version**"
-        )
-    );
-  });
-  
-
-
-//----------------------------------------------------//
-//              Member join and leave                 //
-//----------------------------------------------------//
-
-// join
+//
 client.on('guildMemberAdd', member => {
   const welcomeEmbed = new EmbedBuilder()
-    .setColor('#00FF00')
-    .setTitle('有人加入了')
-    .setDescription(`歡迎🙌 ${member.user}`)
-    .setThumbnail(member.user.displayAvatarURL())
-    .setTimestamp();
+  .setColor('#00FF00')
+  .setTitle('有人進來了!!!')
+  .setDescription(`歡迎 ${member.user} 加入了伺服器`)
+  .setThumbnail(member.user.displayAvatarURL())
+  .setTimestamp();
 
-  // use chat id (JOIN)
-  const channel = member.guild.channels.cache.get('1363521108996919306'); // <== join's chat ID
+  //抓取頻道ID 來傳送訊息
+  const channel = member.guild.channels.cache.get(guildConfig.channelId);
   if (channel) {
-    channel.send({ embeds: [welcomeEmbed] });
+    channel.send({ embed: [welcomeEmbed] })
   }
 });
 
-// leave
 client.on('guildMemberRemove', member => {
   const goodbyeEmbed = new EmbedBuilder()
-    .setColor('#FF0000')
-    .setTitle('有人退出了！！！')
-    .setDescription(`${member.user} \n**離開了我們(┬┬﹏┬┬)**`)
-    .setThumbnail(member.user.displayAvatarURL())
-    .setTimestamp();
+  .setColor('#FF0000')
+  .setTitle('有人離開了!!!')
+  .setDescription(`${member.user} 離開了伺服器`)
+  .setTimestamp();
 
-    // use chat id (LEAVE)
-    const channel = member.guild.channels.cache.get('1363521108996919306'); // <== leave's chat ID
-    if (channel) {
-      channel.send({ embeds: [goodbyeEmbed] });
-    }
-  });
+  //抓取頻道ID 來傳送訊息
+  const channel = member.guild.channels.cache.get(guildConfig.channelId);
+  if (channel) {
+    channel.send({ embed: [goodbyeEmbed] })
+  }
+});
 
 client.on('channelPinsUpdate', (channel, data) => {});
-
-function msToHMS(ms) {
-  let seconds = ms / 1000;
-  const hours = parseInt( seconds / 3600 );
-  seconds = seconds % 3600;
-  const minutes = parseInt( seconds / 60 );
-  seconds = seconds % 60;
-  return(`${hours}:${minutes}:${~~(seconds)}`);
-}
